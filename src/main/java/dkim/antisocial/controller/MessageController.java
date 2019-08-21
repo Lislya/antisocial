@@ -1,11 +1,14 @@
 package dkim.antisocial.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import dkim.antisocial.domain.Message;
+import dkim.antisocial.domain.Views;
 import dkim.antisocial.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,17 +22,20 @@ public class MessageController {
     }
 
     @GetMapping
+    @JsonView({Views.IdText.class})
     public List<Message> list() {
         return messageRepo.findAll();
     }
 
     @GetMapping("{id}")
+    @JsonView({Views.FullMessage.class})
     public Message getOne(@PathVariable("id") Message message) {
         return message;
     }
 
     @PostMapping
     public Message create(@RequestBody Message message) {
+        message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }
 
