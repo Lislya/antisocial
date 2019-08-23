@@ -25,16 +25,19 @@
                 message: null
             }
         },
-        editMessage(message) {
-            this.message = message;
-        },
-        deleteMessage(message) {
-            this.$resource('/message{/id}').remove({id: message.id}).then(result => {
-                if (result.ok) {
-                    this.messages.splice(this.messages.indexOf(this.message), 1);
-                }
-            })
+        methods: {
+            editMessage(message) {
+                this.message = message;
+            },
+            deleteMessage(message) {
+                this.$resource('/message{/id}').remove({id: message.id}).then(result => {
+                    if (result.ok) {
+                        this.messages.splice(this.messages.indexOf(this.message), 1);
+                    }
+                })
+            }
         }
+
     }
 </script>
 
