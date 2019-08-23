@@ -1,5 +1,7 @@
 dd HELP.md
 .gradle
+yarn-error.log
+yarn.lock
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
@@ -30,3 +32,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Node JS ###
+node_modules/
